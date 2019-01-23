@@ -10,6 +10,6 @@ const UnitSchema = new Schema({
 });
 
 // create model for activity
-const Unit = mongoose.model('unit', UnitSchema);
+const Unit = mongoose.model('Unit', UnitSchema);
 
 module.exports = Unit;
