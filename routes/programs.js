@@ -3,18 +3,24 @@ const router = express.Router();
 const Program = require('../models/program');
 
 // GET /programs (R)
-router.get('/program', (req, res, next) => {
+router.get('/', (req, res) => {
   //this will return all the data, exposing only the id and action field to the client
-  Program.find({})
-    .then(data => res.json(data))
-    .catch(next)
+  Program.find()
+    .then(programs => res.json(programs))
+    .catch(
+      error => res.status(500).json({
+        error: error.message
+      })
+    )
 });
+
+
 
 // Only allow registered users to post and delete programs
 // router.use(requireJwt)
 
 // POST /programs (C)
-router.post('/programs', (req, res, next) => {
+router.post('/', (req, res, next) => {
   if(req.body){
     Program.create(req.body)
       .then(data => res.json(data))
@@ -27,7 +33,7 @@ router.post('/programs', (req, res, next) => {
 });
 
 // DELETE /programs/:id (D)
-router.delete('/programs/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   Program.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
     .catch(next)

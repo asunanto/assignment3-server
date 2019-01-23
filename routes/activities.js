@@ -3,7 +3,7 @@ const router = express.Router();
 const Activity = require('../models/activity');
 
 // GET /activities (R)
-router.get('/activity', (req, res, next) => {
+router.get('/', (req, res, next) => {
   //this will return all the data, exposing only the id and important fields to the client
   Activity.find({})
     .then(data => res.json(data))
@@ -14,7 +14,7 @@ router.get('/activity', (req, res, next) => {
 // router.use(requireJwt)
 
 // POST /activities (C)
-router.post('/activities', (req, res, next) => {
+router.post('/', (req, res, next) => {
   if(req.body){
     Activity.create(req.body)
       .then(data => res.json(data))
@@ -27,7 +27,7 @@ router.post('/activities', (req, res, next) => {
 });
 
 // DELETE /activities/:id (D)
-router.delete('/activities/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   Activity.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
     .catch(next)

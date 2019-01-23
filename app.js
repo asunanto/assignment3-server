@@ -13,8 +13,8 @@ const {
 
 const app = express()
 
-// const dbConn = 'mongodb://localhost/assignment-3'
-const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
+const dbConn = 'mongodb://localhost/assignment-3'
+// const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
 
 
 
@@ -47,6 +47,8 @@ mongoose.connect(dbConn, (err) => {
 app.use('/auth', require('./routes/auth'))
 // app.use('/admin', require('./routes/admin'))
 app.use('/bookmarks', require('./routes/bookmarks'))
+app.use('/programs', require('./routes/programs'))
+app.use('/activities', require('./routes/activities'))
 
 app.get('/', (req, res) => {
   res.status(200).send('Bookmark server')
