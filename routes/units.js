@@ -27,7 +27,7 @@ router.post('/', (req, res, next) => {
 });
 
 // DELETE /units/:id (D)
-router.delete('/programs/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   Unit.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
     .catch(next)
