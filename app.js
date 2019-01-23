@@ -47,8 +47,11 @@ mongoose.connect(dbConn, (err) => {
 app.use('/auth', require('./routes/auth'))
 // app.use('/admin', require('./routes/admin'))
 app.use('/bookmarks', require('./routes/bookmarks'))
-app.use('/programs', require('./routes/programs'))
 app.use('/activities', require('./routes/activities'))
+app.use('/programs', require('./routes/programs'))
+app.use('/units', require('./routes/units'))
+app.use('/users', require('./routes/users'))
+
 
 app.get('/', (req, res) => {
   res.status(200).send('Bookmark server')
