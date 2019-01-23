@@ -5,7 +5,7 @@ const Program = require('../models/program');
 // GET /programs (R)
 router.get('/program', (req, res, next) => {
   //this will return all the data, exposing only the id and action field to the client
-  Program.find({}, 'action')
+  Program.find({})
     .then(data => res.json(data))
     .catch(next)
 });
@@ -15,13 +15,13 @@ router.get('/program', (req, res, next) => {
 
 // POST /programs (C)
 router.post('/programs', (req, res, next) => {
-  if(req.body.action){
+  if(req.body){
     Program.create(req.body)
       .then(data => res.json(data))
       .catch(next)
   } else {
     res.json({
-      error: "The input field is empty"
+      error: "You need to write something here." // input field is empty
     })
   }
 });

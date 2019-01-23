@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// require CategorySchema
 
 const ProgramSchema = new Schema({
     name: String,
     description: String,
     user_id: String,
-    categories: String,
-    timeStamp: String,
+    categories: CategorySchema,
+    createdAt: Date,
     activity_id: String,
-    length: Time, // Is this the appropriate value? We want users to be able to select how many minutes the program will run for.
+    length: Integer, // We want users to be able to select how many minutes the program will run for in five minute increments. We can do this by writing a loop.
 });
 
 // create model for activity

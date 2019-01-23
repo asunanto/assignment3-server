@@ -4,8 +4,8 @@ const Activity = require('../models/activity');
 
 // GET /activities (R)
 router.get('/activity', (req, res, next) => {
-  //this will return all the data, exposing only the id and action field to the client
-  Activity.find({}, 'action')
+  //this will return all the data, exposing only the id and important fields to the client
+  Activity.find({})
     .then(data => res.json(data))
     .catch(next)
 });
@@ -15,13 +15,13 @@ router.get('/activity', (req, res, next) => {
 
 // POST /activities (C)
 router.post('/activities', (req, res, next) => {
-  if(req.body.action){
+  if(req.body){
     Activity.create(req.body)
       .then(data => res.json(data))
       .catch(next)
   } else {
     res.json({
-      error: "The input field is empty"
+      error: "You need to write something here." // input field is empty
     })
   }
 });
