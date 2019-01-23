@@ -14,7 +14,7 @@ router.get('/unit', (req, res, next) => {
 // router.use(requireJwt)
 
 // POST /units (C)
-router.post('/units', (req, res, next) => {
+router.post('/', (req, res, next) => {
   if(req.body){
     Unit.create(req.body)
       .then(data => res.json(data))
