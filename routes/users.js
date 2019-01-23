@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
 });
 
 // DELETE /users/:id (D)
-router.delete('/users/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   User.findOneAndDelete({ "_id": req.params.id })
     .then(data => res.json(data))
     .catch(next)
