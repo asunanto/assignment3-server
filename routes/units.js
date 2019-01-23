@@ -3,7 +3,7 @@ const router = express.Router();
 const Unit = require('../models/unit');
 
 // GET /units (R)
-router.get('/unit', (req, res, next) => {
+router.get('/', (req, res, next) => {
   //this will return all the data
   Unit.find({})
     .then(data => res.json(data))
