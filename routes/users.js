@@ -1,9 +1,9 @@
-const express = require ('express');
+const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
 // GET /users (R)
-router.get('/user', (req, res, next) => {
+router.get('/', (req, res, next) => {
   //this will return all the data
   User.find({})
     .then(data => res.json(data))
@@ -13,8 +13,8 @@ router.get('/user', (req, res, next) => {
 // router.use(requireJwt)
 
 // POST /users (C)
-router.post('/users', (req, res, next) => {
-  if(req.body){
+router.post('/', (req, res, next) => {
+  if (req.body) {
     User.create(req.body)
       .then(data => res.json(data))
       .catch(next)
@@ -26,8 +26,8 @@ router.post('/users', (req, res, next) => {
 });
 
 // DELETE /users/:id (D)
-router.delete('/users/:id', (req, res, next) => {
-  User.findOneAndDelete({"_id": req.params.id})
+router.delete('/:id', (req, res, next) => {
+  User.findOneAndDelete({ "_id": req.params.id })
     .then(data => res.json(data))
     .catch(next)
 })
