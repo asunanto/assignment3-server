@@ -26,6 +26,20 @@ router.post('/', (req, res, next) => {
   }
 });
 
+// router.post('/:id/addUser/', requireJwt, async (req, res) => {
+  
+//   const addUserToUnit = await Unit.findByIdAndUpdate(
+//     req.params.id, 
+//     {$addToSet: {users: req.user}}, // addToSet adds an element to a field
+//     {new: true} // setting to return the updated property
+//     )
+//   if (!addUserToUnit) res.status(404).json({
+//     error: "Unit Id not found"
+//   })
+//   res.json(addUserToUnit)
+// })
+
+
 // DELETE /units/:id (D)
 router.delete('/:id', (req, res, next) => {
   Unit.findOneAndDelete({"_id": req.params.id})

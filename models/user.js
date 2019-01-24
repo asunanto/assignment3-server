@@ -14,12 +14,12 @@ const User = new Schema({
   },
   role: String,
   // unit_id: UnitSchema,
-  membership_no: String,
+  membershipNo: String,
   phone: String
   // avatar: Image
 });
 
 // connect passportLocalMongoose and use 'email' instead of 'username'
-User.plugin(passportLocalMongoose, { usernameField: 'email' });
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
 module.exports = mongoose.model('User', User);

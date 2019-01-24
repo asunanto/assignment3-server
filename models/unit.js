@@ -9,6 +9,19 @@ const UnitSchema = new Schema({
     // ageLevel: AgeLevelSchema,
 });
 
+// const unitSchema = new Schema({
+//   name: String,
+//   guideHutName: String,
+//   guideHutAddress: String,
+//   users: [{
+//     type: new Schema({
+//       email: String
+//     })
+//   }]
+//   // ageLevel: ageLevelschema
+// });
+
+
 // create model for activity
 const Unit = mongoose.model('Unit', UnitSchema);
 
