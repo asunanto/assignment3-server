@@ -7,7 +7,16 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
-  role: String
+  name: {
+    firstname: String,
+    lastname: String,
+    guidename: String,
+  },
+  role: String,
+  // unit_id: UnitSchema,
+  membership_no: String,
+  phone: String
+  // avatar: Image
 });
 
 // connect passportLocalMongoose and use 'email' instead of 'username'

@@ -13,6 +13,6 @@ const ProgramSchema = new Schema({
 });
 
 // create model for activity
-const Program = mongoose.model('program', ProgramSchema);
+const Program = mongoose.model('Program', ProgramSchema);
 
 module.exports = Program;
