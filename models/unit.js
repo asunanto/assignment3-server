@@ -18,7 +18,12 @@ const UnitSchema = new Schema({
       type: new Schema({
         name: String
       })
-    }
+    },
+    programs: [{
+      type: new Schema({
+        name: String
+      })
+    }]
 });
 
 // const unitSchema = new Schema({
