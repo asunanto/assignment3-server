@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const {ageLevelSchema} = require('./agelevel')
 // require AgeLevelSchema
 
 const UnitSchema = new Schema({
     name: String,
     guidehut: String, // How does this work? Do we have a GuideHut table?
-    user_id: String
-    // ageLevel: AgeLevelSchema,
+    user_id: String,
+    // ageLevel: ageLevelSchema
 });
 
 // const unitSchema = new Schema({

@@ -46,7 +46,6 @@ mongoose.connect(dbConn, (err) => {
 // Use defined routes
 app.use('/auth', require('./routes/auth'))
 // app.use('/admin', require('./routes/admin'))
-app.use('/bookmarks', require('./routes/bookmarks'))
 app.use('/programs', require('./routes/programs'))
 app.use('/activities', require('./routes/activities'))
 app.use('/units', require('./routes/units'))

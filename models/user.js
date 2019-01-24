@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 // Mongoose adds some methods to your Schema.
 const passportLocalMongoose = require('passport-local-mongoose');
 
-const User = new Schema({
+const userSchema = new Schema({
   name: {
     firstname: String,
     lastname: String,
-    guidename: String,
+    guidename: String
   },
   role: String,
   // unit_id: UnitSchema,
@@ -22,4 +22,4 @@ const User = new Schema({
 // connect passportLocalMongoose and use 'email' instead of 'username'
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', userSchema);

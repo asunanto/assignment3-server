@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-module.exports = mongoose.model('AgeLevel',
-    new Schema({
-        ageLevel: String
-    }));
+const ageLevelSchema =  new Schema({
+    ageLevelname: String
+})
+
+const AgeLevel = mongoose.model('AgeLevel',ageLevelSchema);
+exports = {AgeLevel, ageLevelSchema}

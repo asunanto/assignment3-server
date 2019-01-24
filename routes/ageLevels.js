@@ -1,5 +1,5 @@
 const express = require('express');
-const AgeLevel = require('../models/agelevel');
+const {AgeLevel} = require('../models/agelevel');
 const router = express.Router();
 
 // const {
