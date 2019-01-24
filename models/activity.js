@@ -6,8 +6,11 @@ const ActivitySchema = new Schema({
     title: String,
     description: String,
     user_id: String,
-    // ageLevel: AgeLevelSchema,
-    // categories: CategorySchema,
+    ageLevel: {
+        type: new Schema({
+          name: String
+        })
+      },
     createdAt: Date,
     length: Number, // Is this the appropriate value? We want users to be able to select how many minutes the activity will take to run.
 });
