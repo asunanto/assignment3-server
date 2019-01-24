@@ -6,4 +6,4 @@ const ageLevelSchema =  new Schema({
 })
 
 const AgeLevel = mongoose.model('AgeLevel',ageLevelSchema);
-exports = {AgeLevel, ageLevelSchema}
+module.exports = AgeLevel
