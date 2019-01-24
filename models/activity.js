@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const ActivitySchema = new Schema({
     title: String,
     description: String,
-    user_id: String,
+    user: {
+        type: new Schema({
+          email: String
+        })
+      },
     ageLevel: {
         type: new Schema({
           name: String

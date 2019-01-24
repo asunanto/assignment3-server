@@ -5,10 +5,24 @@ const Schema = mongoose.Schema;
 const ProgramSchema = new Schema({
     name: String,
     description: String,
-    // user_id: String,
-    // categories: CategorySchema,
+    user: {
+        type: new Schema({
+          email: String
+        })
+      },
+    unit: {
+        type: new Schema({
+          name: String
+        })
+      },
     createdAt: Date,
-    // activity_id: String,
+    activities: [{
+        type: new Schema({
+          title: String,
+          description: String,
+          length: String
+        })
+      }],
     length: Number // We want users to be able to select how many minutes the program will run for in five minute increments. We can do this by writing a loop.
 });
 

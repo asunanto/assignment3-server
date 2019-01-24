@@ -1,6 +1,7 @@
 const express = require ('express');
 const router = express.Router();
 const Activity = require('../models/activity');
+const {requireJwt} = require('../middleware/auth')
 
 // GET /activities (R)
 router.get('/', (req, res, next) => {
@@ -14,9 +15,17 @@ router.get('/', (req, res, next) => {
 // router.use(requireJwt)
 
 // POST /activities (C)
-router.post('/', (req, res, next) => {
+router.post('/', requireJwt, (req, res, next) => {
   if(req.body){
-    Activity.create(req.body)
+
+    Activity.create({
+      title: req.body.title,
+      description: req.body.description,
+      user: req.user,
+      ageLevel: req.body.ageLevel,
+      createdAt: req.body.createdAt,
+      length: req.body.length, // 
+    })
       .then(data => res.json(data))
       .catch(next)
   } else {
@@ -25,6 +34,10 @@ router.post('/', (req, res, next) => {
     })
   }
 });
+
+
+
+
 
 // DELETE /activities/:id (D)
 router.delete('/:id', (req, res, next) => {

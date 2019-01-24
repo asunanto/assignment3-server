@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// require AgeLevelSchema
 
 const UnitSchema = new Schema({
     name: String,
