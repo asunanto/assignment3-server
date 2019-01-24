@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
   
 //   const addUserToUnit = await Unit.findByIdAndUpdate(
 //     req.params.id, 
-//     {$addToSet: {users: req.user}}, // addToSet adds an element to a field
+//     {$addToSet: {users: req.user._id}}, // addToSet adds an element to a field
 //     {new: true} // setting to return the updated property
 //     )
 //   if (!addUserToUnit) res.status(404).json({

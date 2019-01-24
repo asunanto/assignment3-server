@@ -13,7 +13,11 @@ const userSchema = new Schema({
     guidename: String
   },
   role: String,
-  // unit_id: UnitSchema,
+  unit: {
+    type: new Schema({
+      name: String
+    })
+  },
   membershipNo: String,
   phone: String
   // avatar: Image

@@ -2,6 +2,7 @@ const passport = require('passport')
 const User = require('../models/user')
 const JWT = require('jsonwebtoken')
 const PassportJwt = require('passport-jwt')
+const Unit = require('../models/unit')
 require('dotenv').config()
 
 const jwtSecret = process.env.JWT_SECRET
@@ -52,13 +53,36 @@ passport.deserializeUser(User.deserializeUser());
 
 
 const register = (req, res, next) => {
+  //   const addUserToUnit = await Unit.findByIdAndUpdate(
+//     req.params.id, 
+//     {$addToSet: {users: req.user._id}}, // addToSet adds an element to a field
+//     {new: true} // setting to return the updated property
+//     )
+//   if (!addUserToUnit) res.status(404).json({
+//     error: "Unit Id not found"
+//   })
+//   res.json(addUserToUnit)
   User.register(new User({
     email: req.body.email,
-    role: req.body.role || 'user'
-  }), req.body.password, (err, user) => {
+    role: req.body.role || 'user',
+    unit: req.body.unit
+  }), req.body.password, async(err, user) => {
     if (err) {
       return res.status(500).send(err.message);
     }
+    const addUserToUnit = await Unit.findByIdAndUpdate(
+          req.body.unit, {
+            $addToSet: {
+              users:{
+                _id: user._id,
+                email: req.body.email
+              } 
+            }
+          }
+        )
+    if (!addUserToUnit) res.status(404).json({
+      error: "Unit Id not found"
+    })
     // res.status(200).json(user)
     req.user = user
     next()
