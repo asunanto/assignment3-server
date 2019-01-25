@@ -1,6 +1,7 @@
 const express = require('express');
 const AgeLevel = require('../models/agelevel');
 const router = express.Router();
+const Activity = require('../models/activity')
 
 // const {
 //     requireJwt
@@ -19,6 +20,13 @@ router.get('/', (req, res) => {
     )
 })
 
+router.get('/:id/activities',async (req,res) => {
+    const agelevel = await AgeLevel.findById(req.params.id)
+    if (!agelevel) res.json({error: "Age level id not found"})
+    const activity = await Activity.find({"ageLevel":agelevel})
+    if (!activity) res.json({error: "no activity found for this age level"})
+    res.json(activity)
+})
 // Only allow registered users to post and delete bookmarks
 // router.use(requireJwt)
 
