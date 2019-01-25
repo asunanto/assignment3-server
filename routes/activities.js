@@ -15,29 +15,11 @@ router.get('/', (req, res, next) => {
 // router.use(requireJwt)
 
 // POST /activities (C)
-router.post('/', requireJwt, (req, res, next) => {
-  if(req.body){
-
-    Activity.create({
-      title: req.body.title,
-      description: req.body.description,
-      user: req.user,
-      ageLevel: req.body.ageLevel,
-      createdAt: req.body.createdAt,
-      length: req.body.length, // 
-    })
-      .then(data => res.json(data))
-      .catch(next)
-  } else {
-    res.json({
-      error: "You need to write something here." // input field is empty
-    })
-  }
+router.post('/', requireJwt, async(req, res) => {
+  req.body.user = req.user
+  const activity = await Activity.create(req.body)
+  res.json(activity)
 });
-
-
-
-
 
 // DELETE /activities/:id (D)
 router.delete('/:id', (req, res, next) => {

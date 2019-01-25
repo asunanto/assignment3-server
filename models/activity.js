@@ -7,7 +7,11 @@ const ActivitySchema = new Schema({
     description: String,
     user: {
         type: new Schema({
-          email: String
+          name: {
+            firstname: String,
+            lastname: String,
+            guidename: String
+          }
         })
       },
     ageLevel: {
@@ -15,8 +19,8 @@ const ActivitySchema = new Schema({
           name: String
         })
       },
-    createdAt: Date,
-    length: Number, // Is this the appropriate value? We want users to be able to select how many minutes the activity will take to run.
+    createdAt: { type: Date, default: Date.now },
+    length: Number // Is this the appropriate value? We want users to be able to select how many minutes the activity will take to run.
 });
 
 // create model for activity
