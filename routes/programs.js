@@ -41,6 +41,7 @@ router.post('/', requireJwt, async(req, res, next) => {
 });
 
 router.put('/:id/addActivities', requireJwt, async(req,res,next) => {
+  //:id is the id for program
     const addActivitiesToProgram = await Program.findByIdAndUpdate(req.params.id, {
       $set: {activities: req.body.activities}
     }, {new: true}) // returns updated program

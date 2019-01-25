@@ -62,11 +62,13 @@ const register = (req, res, next) => {
 //     error: "Unit Id not found"
 //   })
 //   res.json(addUserToUnit)
-  User.register(new User({
-    email: req.body.email,
-    role: req.body.role || 'user',
-    unit: req.body.unit
-  }), req.body.password, async(err, user) => {
+  req.body.role = req.body.role || 'user'
+  User.register(new User(
+    req.body
+    // email: req.body.email,
+    // role: req.body.role || 'user',
+    // unit: req.body.unit
+  ), req.body.password, async(err, user) => {
     if (err) {
       return res.status(500).send(err.message);
     }

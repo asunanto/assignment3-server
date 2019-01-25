@@ -6,11 +6,11 @@ const UnitSchema = new Schema({
     guidehut: String, // How does this work? Do we have a GuideHut table?
     users: [{
       type: new Schema({
-        // name: {
-        //   firstname: String,
-        //   lastname: String,
-        //   guidename: String
-        // }
+        name: {
+          firstname: String,
+          lastname: String,
+          guidename: String
+        },
         email: String
       })
     }],

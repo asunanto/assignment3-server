@@ -1,0 +1,65 @@
+[{
+    "_id": ObjectId("5c4a6dc83ba8ccb52f30c0fd"),
+    "name": "Brownies 1",
+    "ageLevel": {
+      "_id": ObjectId("5c490e484ec6471df76bdc94"),
+      "name": "Brownies"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc802af6dbe2b481c95"),
+    "name": "Brownies 2",
+    "ageLevel": {
+      "_id": ObjectId("5c490e484ec6471df76bdc94"),
+      "name": "Brownies"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc84440e10bbdbf6041"),
+    "name": "Gumnuts 1",
+    "ageLevel": {
+      "_id": ObjectId("5c490eea4403411e6da8a555"),
+      "name": "Gumnuts"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc892341ff922766f1e"),
+    "name": "Gumnuts 2",
+    "ageLevel": {
+      "_id": ObjectId("5c490eea4403411e6da8a555"),
+      "name": "Gumnuts"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc8efd8f75f2720c3b4"),
+    "name": "Ranger 1",
+    "ageLevel": {
+      "_id": ObjectId("5c4a6dc8cf78ba0d95d66f6c"),
+      "name": "Ranger"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc8757a4dc6950fd9db"),
+    "name": "Ranger 2",
+    "ageLevel":{
+      "_id": ObjectId("5c4a6dc8cf78ba0d95d66f6c"),
+      "name": "Ranger"
+    },
+    "users":[],
+    "programs":[]
+  },
+  {
+    "_id": ObjectId("5c4a6dc85a435099e9409786"),
+    "name": "Admin"
+  }
+]

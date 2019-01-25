@@ -1,0 +1,13 @@
+[{
+    "_id": ObjectId("5c4a6dc8cf78ba0d95d66f6c"),
+    "name": "Ranger"
+  },
+  {
+    "_id": ObjectId("5c490e484ec6471df76bdc94"),
+    "name": "Brownies"
+  },
+  {
+    "_id": ObjectId("5c490eea4403411e6da8a555"),
+    "name": "Gumnuts"
+  }
+]
