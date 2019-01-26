@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// require AgeLevelSchema & CategorySchema
 
 const ActivitySchema = new Schema({
     title: String,
@@ -20,6 +19,7 @@ const ActivitySchema = new Schema({
         })
       },
     createdAt: { type: Date, default: Date.now },
+    category: String,
     length: Number // Is this the appropriate value? We want users to be able to select how many minutes the activity will take to run.
 });
 
