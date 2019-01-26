@@ -24,6 +24,7 @@ const ProgramSchema = new Schema({
         type: new Schema({
           title: String,
           description: String,
+          category: String,
           length: String
         })
       }],
