@@ -19,7 +19,7 @@ const ProgramSchema = new Schema({
           name: String
         })
       },
-    createdAt: Date,
+    createdAt: { type: Date, default: Date.now },
     activities: [{
         type: new Schema({
           title: String,
