@@ -7,7 +7,11 @@ const ProgramSchema = new Schema({
     description: String,
     user: {
         type: new Schema({
-          email: String
+          name: {
+            firstname: String,
+            lastname: String,
+            guidename: String
+          }
         })
       },
     unit: {
