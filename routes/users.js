@@ -7,16 +7,15 @@ const Program = require('../models/program')
 
 // GET /users (R)
 router.get('/', requireJwt, async(req, res, next) => {
-  const activities = await Activity.find({"user":req.user})
-  if (!activities) res.status(404).json({
-    error: "Cant find activity from user"
-  })
-  const programs = await Program.find({"user":req.user})
-  if (!programs) res.status(404).json({
-    error: "Cant find activity from user"
-  })
-
-  res.json({activities, programs})
+  // const activities = await Activity.find({"user":req.user})
+  // if (!activities) res.status(404).json({
+  //   error: "Cant find activity from user"
+  // })
+  // const programs = await Program.find({"user":req.user})
+  // if (!programs) res.status(404).json({
+  //   error: "Cant find activity from user"
+  // })
+  res.json(req.user)
   
 });
 

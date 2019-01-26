@@ -63,25 +63,15 @@ const register = (req, res, next) => {
 //   })
 //   res.json(addUserToUnit)
   req.body.role = req.body.role || 'user'
-  User.register(new User(
-    req.body
-    // email: req.body.email,
-    // role: req.body.role || 'user',
-    // unit: req.body.unit
-  ), req.body.password, async(err, user) => {
+  User.register(new User(req.body), req.body.password, async(err, user) => {
     if (err) {
       return res.status(500).send(err.message);
     }
-    const addUserToUnit = await Unit.findByIdAndUpdate(
-          req.body.unit, {
-            $addToSet: {
-              users:{
-                _id: user._id,
-                email: req.body.email
-              } 
-            }
-          }
-        )
+    const addUserToUnit = await Unit.findByIdAndUpdate(req.body.unit, {
+      $addToSet: {
+        users: req.body
+      }
+    })
     if (!addUserToUnit) res.status(404).json({
       error: "Unit Id not found"
     })

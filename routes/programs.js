@@ -3,6 +3,7 @@ const router = express.Router();
 const Program = require('../models/program');
 const {requireJwt} = require('../middleware/auth')
 const Unit = require('../models/unit')
+const User = require('../models/user')
 
 // GET /programs (R)
 router.get('/', (req, res) => {
@@ -34,20 +35,27 @@ router.get('/:id', async(req, res) => {
 
 // POST /programs (C)
 router.post('/', requireJwt, async(req, res, next) => {
-    req.body.unit = req.user.unit
-    req.body.user = req.user
+  req.body.unit = req.user.unit
+  req.body.user = req.user
+  try{
     const program = await Program.create(req.body)
     if (!program) res.status(404).json({
       error: "error occured while creating program"
     })
+
     const unit = await Unit.findByIdAndUpdate(req.user.unit,{
-      $addToSet: {programs: program}
-    })
-    if (!unit) res.status(404).json({
-      error: "can't find unit id"
-    })
+      $addToSet: {programs: program}, 
+    }, { new: true })
+    if (!unit) res.status(404).json({error: "can't find unit id"})
     
+    const user = await User.findByIdAndUpdate(req.user, {
+      $addToSet: {programs: program}
+    }, { new: true })
+    if (!user) res.status(404).json({error: "can't find user id"})
+
     res.json(program)
+  }
+  catch (error) { res.json({error}) }
   
 });
 
