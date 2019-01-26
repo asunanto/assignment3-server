@@ -10,6 +10,13 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
+router.get('/:id', async(req, res) => {
+  //this will return one data, exposing only the id and important fields to the client
+  const unit = await Unit.findById(req.params.id)
+  if (!unit) res.status(404).json({error: "Error Unit ID not found"})
+  res.json(unit)
+});
+
 // Only allow registered users to post and delete units
 // router.use(requireJwt)
 

@@ -11,6 +11,13 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
+router.get('/:id', async(req, res) => {
+  //this will return one data, exposing only the id and important fields to the client
+  const activity = await Activity.findById(req.params.id)
+  if (!activity) return res.status(404).json({error: "Error Activity ID not found"})
+  res.json(activity)
+});
+
 // Only allow registered users to post and delete activities
 // router.use(requireJwt)
 
