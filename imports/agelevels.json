@@ -1,4 +1,5 @@
-[{
+[
+  {
     "_id": ObjectId("5c4a6dc8cf78ba0d95d66f6c"),
     "name": "Ranger"
   },
@@ -9,5 +10,9 @@
   {
     "_id": ObjectId("5c490eea4403411e6da8a555"),
     "name": "Gumnuts"
+  },
+  {
+    "_id": ObjectId("5c4fc6d347d71e1778a70afd"),
+    "name": "All Age Levels"
   }
 ]
