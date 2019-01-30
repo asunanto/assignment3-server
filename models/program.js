@@ -22,10 +22,10 @@ const ProgramSchema = new Schema({
     createdAt: { type: Date, default: Date.now },
     activities: [{
         type: new Schema({
-          title: String,
-          description: String,
-          category: String,
-          length: String
+          // title: String,
+          // description: String,
+          // category: String,
+          // length: String
         })
       }],
     length: Number // We want users to be able to select how many minutes the program will run for in five minute increments. We can do this by writing a loop.

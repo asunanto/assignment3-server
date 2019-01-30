@@ -30,6 +30,13 @@ router.get('/activities', requireJwt, async(req,res) => {
   res.json(activities)
 })
 
+router.get('/programs', requireJwt, async(req,res) => {
+  const programs = await Program.find({"user":req.user})
+  if (!programs) res.status(404).json({
+    error: "Cant find programs from user"
+  })
+  res.json(programs)
+})
 // DELETE /users/:id (D)
 router.delete('/:id', (req, res, next) => {
   User.findOneAndDelete({ "_id": req.params.id })

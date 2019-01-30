@@ -43,15 +43,15 @@ router.post('/', requireJwt, async(req, res, next) => {
       error: "error occured while creating program"
     })
 
-    const unit = await Unit.findByIdAndUpdate(req.user.unit,{
-      $addToSet: {programs: program}, 
-    }, { new: true })
-    if (!unit) res.status(404).json({error: "can't find unit id"})
+    // const unit = await Unit.findByIdAndUpdate(req.user.unit,{
+    //   $addToSet: {programs: program}, 
+    // }, { new: true })
+    // if (!unit) res.status(404).json({error: "can't find unit id"})
     
-    const user = await User.findByIdAndUpdate(req.user, {
-      $addToSet: {programs: program}
-    }, { new: true })
-    if (!user) res.status(404).json({error: "can't find user id"})
+    // const user = await User.findByIdAndUpdate(req.user, {
+    //   $addToSet: {programs: program}
+    // }, { new: true })
+    // if (!user) res.status(404).json({error: "can't find user id"})
 
     res.json(program)
   }

@@ -1,6 +1,7 @@
 const express = require ('express');
 const router = express.Router();
 const Activity = require('../models/activity');
+const Unit = require('../models/unit')
 const User = require('../models/user');
 const {requireJwt} = require('../middleware/auth')
 
@@ -28,14 +29,28 @@ router.get('/:id', async(req, res) => {
 
 // POST /activities (C)
 router.post('/', requireJwt, async(req, res) => {
+  // const unit = await Unit.findById(req.user.unit)
+  // req.body.ageLevel = unit.ageLevel
   req.body.user = req.user
   const activity = await Activity.create(req.body)
-  const user = await User.findByIdAndUpdate(req.user, {
-    $addToSet: { activities: activity }
+  // const user = await User.findByIdAndUpdate(req.user, {
+  //   $addToSet: { activities: activity }
+  // }, { new: true })
+  if (!user) res.status(404).json({error: "user id not found"})
+  res.json(activity)
+});
+// Update /activities/:id
+router.put('/:id', requireJwt, async(req, res) => {
+  // const unit = await Unit.findById(req.user.unit)
+  // req.body.ageLevel = unit.ageLevel
+  req.body.user = req.user
+  const activity = await Activity.findByIdAndUpdate(req.params.id, {
+    $set: req.body
   }, { new: true })
   if (!user) res.status(404).json({error: "user id not found"})
   res.json(activity)
 });
+
 
 // DELETE /activities/:id (D)
 router.delete('/:id', (req, res, next) => {

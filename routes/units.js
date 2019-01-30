@@ -1,6 +1,8 @@
 const express = require ('express');
 const router = express.Router();
 const Unit = require('../models/unit');
+const Program = require('../models/program')
+const User = require('../models/user')
 
 // GET /units (R)
 router.get('/', (req, res, next) => {
@@ -15,7 +17,9 @@ router.get('/:id', async(req, res) => {
   try {
     const unit = await Unit.findById(req.params.id)
     if (!unit) res.status(404).json({error: "Error Unit ID not found"})
-    res.json(unit)
+    const programs = await Program.find({unit})
+    const users = await User.find({unit})
+    res.json({unit,programs,users})
   }
   catch(error) { res.json({error}) }  
 });

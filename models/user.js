@@ -19,22 +19,7 @@ const userSchema = new Schema({
     })
   },
   membershipNo: String,
-  phone: String,
-  
-  activities: [{
-    type: new Schema({
-      title: String,
-      description: String,
-      length: Number
-    })
-  }],
-  programs: [{
-    type: new Schema({
-      name: String,
-      description: String,
-      length: Number
-    })
-  }]
+  phone: String
   
   // avatar: Image
 });
