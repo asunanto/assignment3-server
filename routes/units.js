@@ -3,6 +3,8 @@ const router = express.Router();
 const Unit = require('../models/unit');
 const Program = require('../models/program')
 const User = require('../models/user')
+const {requireJwt} = require('../middleware/auth')
+
 
 // GET /units (R)
 router.get('/', (req, res, next) => {
@@ -12,10 +14,10 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/myUnit',requireJwt ,async(req, res) => {
   //this will return one data, exposing only the id and important fields to the client
   try {
-    const unit = await Unit.findById(req.params.id)
+    const unit = await Unit.findById(req.user.unit)
     if (!unit) res.status(404).json({error: "Error Unit ID not found"})
     const programs = await Program.find({unit})
     const users = await User.find({unit})
