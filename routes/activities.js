@@ -47,7 +47,7 @@ router.put('/:id', requireJwt, async(req, res) => {
   const activity = await Activity.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, { new: true })
-  if (!user) res.status(404).json({error: "user id not found"})
+  if (!activity) res.status(404).json({error: "user id not found"})
   res.json(activity)
 });
 
