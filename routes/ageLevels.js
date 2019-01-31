@@ -2,6 +2,8 @@ const express = require('express');
 const AgeLevel = require('../models/agelevel');
 const router = express.Router();
 const Activity = require('../models/activity')
+const Unit = require('../models/unit')
+const {requireJwt} = require('../middleware/auth')
 
 // const {
 //     requireJwt
@@ -20,10 +22,11 @@ router.get('/', (req, res) => {
     )
 })
 
-router.get('/:id/activities',async (req,res) => {
-    const agelevel = await AgeLevel.findById(req.params.id)
-    if (!agelevel) res.json({error: "Age level id not found"})
-    const activity = await Activity.find({"ageLevel":agelevel})
+router.get('/activities',requireJwt, async (req,res) => {
+    const unit = await Unit.findOne(req.user.unit)
+    if (!unit) res.json({error: "unit not found"})
+    console.log(unit)
+    const activity = await Activity.find({"ageLevel": unit.ageLevel})
     if (!activity) res.json({error: "no activity found for this age level"})
     res.json(activity)
 })
