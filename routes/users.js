@@ -37,6 +37,19 @@ router.get('/programs', requireJwt, async(req,res) => {
   })
   res.json(programs)
 })
+
+router.put('/',requireJwt, async(req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.user,{
+    $set: req.body
+  },{new:true})
+  await user.setPassword(req.body.password);
+  await user.save();
+  if (!user) res.status(404).json({
+    error: "Cant find programs from user"
+  })
+  res.json(user)
+  
+}); 
 // DELETE /users/:id (D)
 router.delete('/:id', (req, res, next) => {
   User.findOneAndDelete({ "_id": req.params.id })
