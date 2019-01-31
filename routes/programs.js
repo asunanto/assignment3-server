@@ -2,7 +2,7 @@ const express = require ('express');
 const router = express.Router();
 const Program = require('../models/program');
 const {requireJwt} = require('../middleware/auth')
-const Unit = require('../models/unit')
+const Activity = require('../models/activity')
 const User = require('../models/user')
 
 // GET /programs (R)
@@ -20,9 +20,13 @@ router.get('/', (req, res) => {
 router.get('/:id', async(req, res) => {
   //this will return one data, exposing only the id and important fields to the client
   try {
-    const program = await Program.findById(req.params.id)
+    let program = await Program.findById(req.params.id)
     if (!program) res.status(404).json({error: "Error Program ID not found"})
-    res.json(program)
+    let activities = []
+    for (activity of program.activities) {
+      activities.push(await Activity.findById(activity))
+    }
+    res.json({program,activities})
   }
   catch(error) { res.json({error}) }
   
