@@ -1,7 +1,7 @@
-const express = require ('express');
+const express = require('express');
 const router = express.Router();
 const Program = require('../models/program');
-const {requireJwt} = require('../middleware/auth')
+const { requireJwt } = require('../middleware/auth')
 const Activity = require('../models/activity')
 const User = require('../models/user')
 
@@ -17,19 +17,19 @@ router.get('/', (req, res) => {
     )
 });
 
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
   //this will return one data, exposing only the id and important fields to the client
   try {
     let program = await Program.findById(req.params.id)
-    if (!program) res.status(404).json({error: "Error Program ID not found"})
+    if (!program) res.status(404).json({ error: "Error Program ID not found" })
     let activities = []
     for (activity of program.activities) {
       activities.push(await Activity.findById(activity))
     }
-    res.json({program,activities})
+    res.json({ program, activities })
   }
-  catch(error) { res.json({error}) }
-  
+  catch (error) { res.json({ error }) }
+
 });
 
 
@@ -38,10 +38,10 @@ router.get('/:id', async(req, res) => {
 // router.use(requireJwt)
 
 // POST /programs (C)
-router.post('/', requireJwt, async(req, res, next) => {
+router.post('/', requireJwt, async (req, res, next) => {
   req.body.unit = req.user.unit
   req.body.user = req.user
-  try{
+  try {
     const program = await Program.create(req.body)
     if (!program) res.status(404).json({
       error: "error occured while creating program"
@@ -51,7 +51,7 @@ router.post('/', requireJwt, async(req, res, next) => {
     //   $addToSet: {programs: program}, 
     // }, { new: true })
     // if (!unit) res.status(404).json({error: "can't find unit id"})
-    
+
     // const user = await User.findByIdAndUpdate(req.user, {
     //   $addToSet: {programs: program}
     // }, { new: true })
@@ -59,15 +59,15 @@ router.post('/', requireJwt, async(req, res, next) => {
 
     res.json(program)
   }
-  catch (error) { res.json({error}) }
-  
+  catch (error) { res.json({ error }) }
+
 });
 
-router.put('/:id/addActivities', requireJwt, async(req,res,next) => {
+router.put('/:id/addActivities', requireJwt, async (req, res, next) => {
   //:id is the id for program
-    const addActivitiesToProgram = await Program.findByIdAndUpdate(req.params.id, {
-      $set: {activities: req.body}
-    }, {new: true}) // returns updated program
+  const addActivitiesToProgram = await Program.findByIdAndUpdate(req.params.id, {
+    $set: { activities: req.body }
+  }, { new: true }) // returns updated program
   if (!addActivitiesToProgram) res.status(404).json({
     error: "Programs Id not found"
   })
@@ -76,9 +76,21 @@ router.put('/:id/addActivities', requireJwt, async(req,res,next) => {
 
 // DELETE /programs/:id (D)
 router.delete('/:id', (req, res, next) => {
-  Program.findOneAndDelete({"_id": req.params.id})
+  Program.findOneAndDelete({ "_id": req.params.id })
     .then(data => res.json(data))
     .catch(next)
 })
+
+// Update /programs/:id only updates the program details
+router.put('/:id', requireJwt, async (req, res) => {
+  // const unit = await Unit.findById(req.user.unit)
+  // req.body.ageLevel = unit.ageLevel
+  req.body.user = req.user
+  const program = await Program.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, { new: true })
+  if (!program) res.status(404).json({ error: "program id not found" })
+  res.json(program)
+});
 
 module.exports = router;
