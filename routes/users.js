@@ -42,8 +42,8 @@ router.put('/',requireJwt, async(req, res, next) => {
   const user = await User.findByIdAndUpdate(req.user,{
     $set: req.body
   },{new:true})
-  await user.setPassword(req.body.password);
-  await user.save();
+  // await user.setPassword(req.body.password);
+  // await user.save();
   if (!user) res.status(404).json({
     error: "Cant find programs from user"
   })
