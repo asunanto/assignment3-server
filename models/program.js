@@ -29,7 +29,7 @@ const ProgramSchema = new Schema({
     })
   }],
   length: Number, // We want users to be able to select how many minutes the program will run for in five minute increments. We can do this by writing a loop.
-  date: Date
+  date: String
 });
 
 // create model for activity
