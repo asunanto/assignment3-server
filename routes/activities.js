@@ -17,7 +17,7 @@ router.get('/:id', async(req, res) => {
   //this will return one data, exposing only the id and important fields to the client
   try {
     const activity = await Activity.findById(req.params.id)
-    if (!activity) res.status(404).json({error: "Cant find activity id"})
+    if (!activity) return res.status(404).json({error: "Cant find activity id"})
     res.json(activity)
   }
   catch(error) { res.json({error}) }
@@ -29,34 +29,41 @@ router.get('/:id', async(req, res) => {
 
 // POST /activities (C)
 router.post('/', requireJwt, async(req, res) => {
-  // const unit = await Unit.findById(req.user.unit)
-  // req.body.ageLevel = unit.ageLevel
   req.body.user = req.user
   const activity = await Activity.create(req.body)
   // const user = await User.findByIdAndUpdate(req.user, {
   //   $addToSet: { activities: activity }
   // }, { new: true })
-  if (!activity) res.status(404).json({error: "user id not found"})
+  if (!activity) return res.status(404).json({error: "user id not found"})
   res.json(activity)
 });
 // Update /activities/:id
 router.put('/:id', requireJwt, async(req, res) => {
-  // const unit = await Unit.findById(req.user.unit)
-  // req.body.ageLevel = unit.ageLevel
-  req.body.user = req.user
+  const result = await activityAuth(req.params.id, req.user)
+  // if result of auth is negative throw 401 error
+  if (!result) return res.status(401).json({error: "not authorized to edit"})
   const activity = await Activity.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, { new: true })
-  if (!activity) res.status(404).json({error: "user id not found"})
+  if (!activity) return res.status(404).json({error: "user id not found"})
   res.json(activity)
 });
 
 
 // DELETE /activities/:id (D)
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', requireJwt, async (req, res, next) => {
+  const result = await activityAuth(req.params.id, req.user)
+  // if result of auth is negative throw 401 error
+  if (!result) return res.status(401).json({error: "not authorized to edit"})
   Activity.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
     .catch(next)
 })
+
+async function activityAuth(id, user) {
+  const activity = await Activity.findById(id)
+  // have to use .equals to compare object ids
+  return activity.user._id.equals(user._id) || user.role == 'admin'
+}
 
 module.exports = router;

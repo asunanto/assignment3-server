@@ -3,7 +3,6 @@ const router = express.Router();
 const Program = require('../models/program');
 const { requireJwt } = require('../middleware/auth')
 const Activity = require('../models/activity')
-const User = require('../models/user')
 
 // GET /programs (R)
 router.get('/', (req, res) => {
@@ -75,7 +74,9 @@ router.put('/:id/addActivities', requireJwt, async (req, res, next) => {
 })
 
 // DELETE /programs/:id (D)
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
+  const result = await programAuth(req.params.id, req.user)
+  if (!result) return res.status(401).json({error: "not authorized to edit"})
   Program.findOneAndDelete({ "_id": req.params.id })
     .then(data => res.json(data))
     .catch(next)
@@ -83,14 +84,19 @@ router.delete('/:id', (req, res, next) => {
 
 // Update /programs/:id only updates the program details
 router.put('/:id', requireJwt, async (req, res) => {
-  // const unit = await Unit.findById(req.user.unit)
-  // req.body.ageLevel = unit.ageLevel
-  req.body.user = req.user
+  const result = await programAuth(req.params.id, req.user)
+  if (!result) return res.status(401).json({error: "not authorized to edit"})
   const program = await Program.findByIdAndUpdate(req.params.id, {
     $set: req.body
   }, { new: true })
   if (!program) res.status(404).json({ error: "program id not found" })
   res.json(program)
 });
+
+async function programAuth(id, user) {
+  const program = await Program.findById(id)
+  // have to use .equals to compare object ids
+  return program.user._id.equals(user._id) || user.role == 'admin'
+}
 
 module.exports = router;
