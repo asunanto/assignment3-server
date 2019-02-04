@@ -42,9 +42,15 @@ router.put('/',requireJwt, async(req, res, next) => {
   const user = await User.findByIdAndUpdate(req.user,{
     $set: req.body
   },{new:true})
+  await Activity.updateMany(  // updates user fields in activity table
+    {"user._id": user._id}, 
+    { $set: {"user": user}})
+  await Program.updateMany( // updates user fields in program table
+    {"user._id": user._id},
+    { $set: {"user": user}})
   // await user.setPassword(req.body.password);
   // await user.save();
-  if (!user) res.status(404).json({
+  if (!user) return res.status(404).json({
     error: "Cant find programs from user"
   })
   res.json(user)

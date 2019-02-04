@@ -20,17 +20,9 @@
         "activities": [
             {
                 "_id": ObjectId("5c4fc7f8e0662217728fac96"),
-                "title": "campfire brownies",
-                "description": "campfire brownies activity description",
-                "category": "category 1",
-                "length": "20"
             },
             {
                 "_id": ObjectId("5c4fcceee0662217728facb7"),
-                "title": "All Age Levels Activity",
-                "description": "All Age Levels Activity description",
-                "category": "category 1",
-                "length": "40"
             }
         ]
     },
@@ -54,18 +46,10 @@
         },
         "activities": [
             {
-                "_id": ObjectId("5c4fcc11e0662217728facb1"),
-                "title": "campfire gumnuts activity",
-                "description": "campfire gumnuts test activity desc",
-                "category": "category 1",
-                "length": "30"
+                "_id": ObjectId("5c4fcc11e0662217728facb1")
             },
             {
-                "_id": ObjectId("5c4fcbe4e0662217728faca5"),
-                "title": "gumnuts science activity",
-                "description": "gumnuts science activity desc",
-                "category": "category 2",
-                "length": "30"
+                "_id": ObjectId("5c4fcbe4e0662217728faca5")
             }
         ]
     }
