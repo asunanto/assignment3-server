@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
-// const logger = require('morgan') -- log each request
-// const bodyParser = require('body-parser') -- a middleware to parse the request.body
+// const logger = require('morgan') // -- log each request
+const bodyParser = require('body-parser') // -- a middleware to parse the request.body
 const fileUpload = require('express-fileupload')
 const path = require('path') // built-in node module that provides utilities for working with file and directory paths
 require('dotenv').config()
@@ -72,6 +72,8 @@ app.post('/upload', (req, res, next) => {
   // The file will be sent appended to the file key from the frontend.
   let uploadFile = req.files.file // access the file
   const fileName = req.files.file.name // access the filename
+
+  // Uses the mv() method to place the file somewhere on the server (i.e. in "/public")
   uploadFile.mv(
     `${__dirname}/public/files/${fileName}`,
     function (err) {
