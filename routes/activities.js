@@ -6,6 +6,7 @@ const User = require('../models/user');
 const {requireJwt} = require('../middleware/auth')
 const validateObjectId = require('../middleware/validateObjectId')
 
+
 // GET /activities (R)
 router.get('/', (req, res, next) => {
   //this will return all the data, exposing only the id and important fields to the client
