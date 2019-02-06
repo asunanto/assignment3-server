@@ -19,10 +19,10 @@
         },
         "activities": [
             {
-                "_id": ObjectId("5c4fc7f8e0662217728fac96"),
+                "_id": ObjectId("5c4fc7f8e0662217728fac96")
             },
             {
-                "_id": ObjectId("5c4fcceee0662217728facb7"),
+                "_id": ObjectId("5c4fcceee0662217728facb7")
             }
         ]
     },

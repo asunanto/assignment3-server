@@ -9,7 +9,7 @@ const {requireJwt} = require('../middleware/auth')
 router.get('/', (req, res, next) => {
   //this will return all the data, exposing only the id and important fields to the client
   Activity.find({})
-    .then(data => res.json(data))
+    .then(data => {res.status(200).json(data)})
     .catch(next)
 });
 
