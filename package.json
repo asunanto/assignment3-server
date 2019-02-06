@@ -4,7 +4,7 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "test": "mocha",
+    "test": "jest --watchAll --verbose",
     "start": "node app.js"
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "passport-local-mongoose": "^5.0.0"
   },
   "devDependencies": {
-    "should": "^13.2.3",
-    "sinon": "^7.2.3"
+    "jest": "^24.1.0",
+    "supertest": "^3.4.2"
   }
 }

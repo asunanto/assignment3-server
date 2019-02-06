@@ -12,9 +12,9 @@ const {
 } = require('./middleware/auth')
 
 const app = express()
-
+const dbConn = 'mongodb://localhost/assignment-3-test'
 // const dbConn = 'mongodb://localhost/assignment-3'
-const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
+// const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
 
 
 
@@ -56,6 +56,7 @@ app.get('/', (req, res) => {
   res.status(200).send('Bookmark server')
 })
 
+const port = process.env.PORT || 3001
 
-
-app.listen(process.env.PORT || 3001, () => console.log('Listening on http://localhost:3001'))
+const server = app.listen(port, () => console.log(`Listening on port ${port}`))
+module.exports = server
