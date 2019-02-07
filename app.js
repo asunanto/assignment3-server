@@ -18,9 +18,9 @@ const app = express()
 // const dbConn = 'mongodb://localhost/assignment-3-test'
 
 //this connection is for development
-const dbConn = 'mongodb://localhost/assignment-3'
+// const dbConn = 'mongodb://localhost/assignment-3'
 //this connection is for production
-// const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
+const dbConn = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds257564.mlab.com:57564/assignment-3`
 
 
 
