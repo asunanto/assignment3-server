@@ -21,8 +21,6 @@ router.get('/:id', validateObjectId, async(req, res) => {
   const activity = await Activity.findById(req.params.id)
   if (!activity) return res.status(404).json({error: "Cant find activity id"})
   res.json(activity)
-  
-  
 });
 
 // Only allow registered users to post and delete activities
